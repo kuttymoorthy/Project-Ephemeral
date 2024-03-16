@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-// class to play audio
+// This class handles audio playback functionality.
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public class AudioPlayer : MonoBehaviour
@@ -10,8 +11,8 @@ namespace Ephemeral.ScriptsOnly.Scripts
         private AudioSource audioSource;
         [SerializeField]
         private AudioClip[] audioClips;
-        
-        void Awake()
+
+        private void Awake()
         {
             Instance = this;
         }

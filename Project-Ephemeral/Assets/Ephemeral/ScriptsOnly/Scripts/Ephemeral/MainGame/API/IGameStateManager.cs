@@ -1,4 +1,7 @@
-﻿namespace Ephemeral.ScriptsOnly.Scripts
+﻿
+//This interface defines methods for managing game state
+
+namespace Ephemeral.ScriptsOnly.Scripts
 {
     public interface IGameStateManager
     {

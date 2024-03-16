@@ -1,4 +1,7 @@
-﻿namespace Ephemeral.ScriptsOnly.Scripts
+﻿
+//This class handles the player score system in the game
+
+namespace Ephemeral.ScriptsOnly.Scripts
 {
     public class ScoringSystem : IScoringSystem
     {

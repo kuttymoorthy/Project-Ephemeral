@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// This class handles the card properties
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public partial class Card : MonoBehaviour

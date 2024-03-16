@@ -1,4 +1,7 @@
-﻿namespace Ephemeral.ScriptsOnly.Scripts
+﻿
+//This interface defines methods for managing player score system
+
+namespace Ephemeral.ScriptsOnly.Scripts
 {
     public interface IScoringSystem
     {

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//This interface defines methods for managing game play
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public interface IMainGameController

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//This class handles the player game state
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public class GameStateManager : IGameStateManager

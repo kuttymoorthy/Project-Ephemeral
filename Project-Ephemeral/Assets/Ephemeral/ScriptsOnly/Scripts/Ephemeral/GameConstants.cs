@@ -1,4 +1,6 @@
-﻿namespace Ephemeral.ScriptsOnly.Scripts
+﻿
+// This abstract class handles the game constants 
+namespace Ephemeral.ScriptsOnly.Scripts
 {
     public abstract class GameConstants
     {

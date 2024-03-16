@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+// This class is main game controller and handles game layout and other functionality
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public class MainGameController : MonoBehaviour, IMainGameController

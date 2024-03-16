@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+// This class handles the flip animation of the card
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public partial class Card : MonoBehaviour
