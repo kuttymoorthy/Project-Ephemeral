@@ -14,7 +14,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             Flip();
             StartCoroutine(DelayedSelectionEvent());
         }
-
         // Inform main game manager card is selected with a slight delay
         private IEnumerator DelayedSelectionEvent()
         {

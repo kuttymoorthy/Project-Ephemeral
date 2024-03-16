@@ -12,7 +12,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
         {
             StartCoroutine(Fade());
         }
-
         // Play fade animation by changing alpha of img's color
         private IEnumerator Fade()
         {
@@ -20,14 +19,13 @@ namespace Ephemeral.ScriptsOnly.Scripts
             var time = 0.0f;
             var targetColor = Color.clear;
 
-            while (time < GameConstants.CardFixedDuration )
+            while (time < GameConstants.CardFixedDuration)
             {
                 time += Time.deltaTime * rate;
                 img.color = Color.Lerp(img.color, targetColor, time);
                 yield return null;
             }
         }
-
         // Set card to be active color
         public void Active()
         {

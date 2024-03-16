@@ -1,5 +1,4 @@
-﻿
-//This interface defines methods for managing game state
+﻿//This interface defines methods for managing game state
 
 namespace Ephemeral.ScriptsOnly.Scripts
 {

@@ -43,23 +43,19 @@ namespace Ephemeral.ScriptsOnly.Scripts
         private IScoringSystem _scoringSystem;
         private IGameStateManager _gameStateManager;
         private int _score;
-
-        //1D3182
         private void Awake()
         {
             Instance = this;
             _scoringSystem = new ScoringSystem();
             _gameStateManager = new GameStateManager();
         }
-
         private void Start()
         {
-#if UNITY_ANDROID
-            Screen.orientation = ScreenOrientation.LandscapeRight;
-#endif
+            #if UNITY_ANDROID
+                     Screen.orientation = ScreenOrientation.LandscapeRight;
+            #endif
             SetupGame(false, false, true);
         }
-
         private void SetupGame(bool gameStart, bool showGamePanel, bool showInfoPanel)
         {
             LoadGameData();
@@ -68,7 +64,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             var visibilityFlags = new List<bool> { showGamePanel, !showInfoPanel, !showGamePanel };
             SetPanelVisibility(panels, visibilityFlags);
         }
-
         private void LoadGameData()
         {
             _gameStateManager.LoadGameData(out _winningCount, out _missingCount, out _gameSize, out _score);
@@ -76,13 +71,11 @@ namespace Ephemeral.ScriptsOnly.Scripts
             sizeSlider.value = _gameSize;
             SetGameSize();
         }
-
         public void SetGameSize()
         {
             _gameSize = (int)sizeSlider.value;
             sizeLabel.text = _gameSize + " X " + _gameSize;
         }
-
         private void SetPanelVisibility(List<GameObject> panels, List<bool> visibilityFlags)
         {
             if (panels.Count != visibilityFlags.Count)
@@ -95,7 +88,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 panels[i].SetActive(visibilityFlags[i]);
             }
         }
-
         public void StartCardGame()
         {
             if (_gameStart) return;
@@ -126,8 +118,8 @@ namespace Ephemeral.ScriptsOnly.Scripts
             var rowSize = panelSize.x;
             var colSize = panelSize.y;
             var scale = 1.0f / _gameSize;
-            var xInc = rowSize /_gameSize;
-            var yInc = colSize/ _gameSize;
+            var xInc = rowSize / _gameSize;
+            var yInc = colSize / _gameSize;
             var curX = -(rowSize - xInc) / 2;
             var curY = -(colSize - yInc) / 2;
 
@@ -161,10 +153,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 curY += yInc;
             }
         }
-        
-        
-
-
         private void ResetInfo()
         {
             _winningCount = 0;
@@ -173,7 +161,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             matches.text = $"Matches: {_winningCount}";
             turns.text = $"Turns: {_missingCount}";
         }
-
         private void SpriteCardAllocation()
         {
             int[] selectedID = new int[_cards.Length / 2];
@@ -208,7 +195,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 _cards[value].SpriteID = selectedID[i];
             }
         }
-
         private IEnumerator HideFace()
         {
             yield return new WaitForSeconds(0.3f);
@@ -218,22 +204,18 @@ namespace Ephemeral.ScriptsOnly.Scripts
 
             yield return new WaitForSeconds(GameConstants.GameWaitForSeconds);
         }
-
         public Sprite GetSprite(int spriteId)
         {
             return sprites[spriteId];
         }
-
         public Sprite CardBack()
         {
             return cardBack;
         }
-
         public bool CanClick()
         {
             return _gameStart;
         }
-
         private void RestoreGameLayout()
         {
             if (sizeSlider != null)
@@ -247,7 +229,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 _gameSize = GameConstants.GameLayoutMinSize;
             }
         }
-
         public void CardClicked(int spriteId, int cardId)
         {
             if (_spriteSelected == -1)
@@ -269,7 +250,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                     matches.text = $"Matches: {_winningCount}";
                     CheckGameWin();
                     AudioPlayer.Instance.PlayAudio(2);
-
                 }
                 else
                 {
@@ -283,7 +263,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 _cardSelected = _spriteSelected = -1;
             }
         }
-
         private void CheckGameWin()
         {
             if (_cardLeft != 0) return;
@@ -292,7 +271,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             SetPanelVisibility(new List<GameObject> { replayButton, resetButton }, new List<bool> { true, false });
             AudioPlayer.Instance.PlayAudio(1);
         }
-
         public void ReStartGame()
         {
             // Set the game size and start the game
@@ -302,7 +280,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             StartCardGame();
             SaveGameData();
         }
-
         private void EndGame()
         {
             _gameStart = false;
@@ -310,17 +287,15 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 new List<bool> { false, false, true });
             DisplayWinInfo(false);
         }
-
         public void GiveUp()
         {
-           _scoringSystem.ResetScore();
-           _scoringSystem.ResetComboStreak();
-           _gameStateManager.ResetGameData();
+            _scoringSystem.ResetScore();
+            _scoringSystem.ResetComboStreak();
+            _gameStateManager.ResetGameData();
             sizeSlider.value = GameConstants.GameLayoutMinSize;
             SetGameSize();
             EndGame();
         }
-
         public void DisplayWinInfo(bool boolValue)
         {
             if (boolValue)
@@ -332,7 +307,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 winMsg.text = "";
             }
         }
-
         private void Update()
         {
             if (_gameStart)
@@ -343,10 +317,9 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 timer.text = timerText;
             }
         }
-        
         private void SaveGameData()
         {
-            _gameStateManager.SaveGameData(_winningCount, _missingCount, _gameSize,_scoringSystem.Score);
+            _gameStateManager.SaveGameData(_winningCount, _missingCount, _gameSize, _scoringSystem.Score);
         }
     }
 }

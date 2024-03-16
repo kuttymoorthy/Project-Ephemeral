@@ -14,16 +14,14 @@ namespace Ephemeral.ScriptsOnly.Scripts
             PlayerPrefs.SetInt(GameConstants.GameScoreKey, gameScore);
             PlayerPrefs.Save();
         }
-        
         public void LoadGameData(out int winningCount, out int missingCount, out int gameSize, out int gameScore)
         {
             // Currently we are loading only Game Layout Size for the player
-            winningCount = PlayerPrefs.GetInt(GameConstants.WinningCountKey, 0);  
-            missingCount = PlayerPrefs.GetInt(GameConstants.MissingCountKey, 0);  
+            winningCount = PlayerPrefs.GetInt(GameConstants.WinningCountKey, 0);
+            missingCount = PlayerPrefs.GetInt(GameConstants.MissingCountKey, 0);
             gameSize = PlayerPrefs.GetInt(GameConstants.GameSizeKey, GameConstants.GameLayoutMinSize);
             gameScore = PlayerPrefs.GetInt(GameConstants.GameScoreKey, 0);
         }
-        
         public void ResetGameData()
         {
             PlayerPrefs.DeleteAll();

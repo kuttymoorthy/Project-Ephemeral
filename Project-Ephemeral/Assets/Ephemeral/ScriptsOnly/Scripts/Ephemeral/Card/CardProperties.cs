@@ -17,13 +17,11 @@ namespace Ephemeral.ScriptsOnly.Scripts
             }
             get => _spriteID;
         }
-
         public int ID
         {
             set => _id = value;
             get => _id;
         }
-
         // Reset card default rotation
         public void ResetRotation()
         {
