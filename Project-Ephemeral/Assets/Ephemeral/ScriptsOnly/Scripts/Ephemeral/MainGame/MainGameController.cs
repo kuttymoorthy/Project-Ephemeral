@@ -268,6 +268,8 @@ namespace Ephemeral.ScriptsOnly.Scripts
                     score.text = $"Score: {_scoringSystem.Score}"; // Update UI
                     matches.text = $"Matches: {_winningCount}";
                     CheckGameWin();
+                    AudioPlayer.Instance.PlayAudio(2);
+
                 }
                 else
                 {
