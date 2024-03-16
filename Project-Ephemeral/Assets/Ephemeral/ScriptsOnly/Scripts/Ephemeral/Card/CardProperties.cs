@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.MatchGame.ScriptsOnly.Scripts.Ephemeral
+namespace Ephemeral.ScriptsOnly.Scripts
 {
     public partial class Card : MonoBehaviour
     {
