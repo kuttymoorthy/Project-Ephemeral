@@ -36,11 +36,11 @@ namespace Ephemeral.ScriptsOnly.Scripts
             }
         }
         // Perform a 180-degree flip
-        public void Flip()
+        public void Flip(bool flipped)
         {
             _turning = true;
             AudioPlayer.Instance.PlayAudio(0);
-            StartCoroutine(FlipCard(GameConstants.CardFlipDuration, true));
+            StartCoroutine(FlipCard(GameConstants.CardFlipDuration, flipped));
         }
         // Toggle front/back sprite
         private void ChangeSprite()

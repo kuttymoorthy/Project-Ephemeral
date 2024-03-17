@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -18,16 +20,17 @@ namespace Ephemeral.ScriptsOnly.Scripts
         [SerializeField] private GameObject resetButton;
         [SerializeField] private GameObject replayButton;
         [SerializeField] private GameObject menuPanel;
+        [SerializeField] private GameObject helpPanel;
         [SerializeField] private Sprite cardBack;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private Slider sizeSlider;
         [SerializeField] private Card spritePreload;
-        [SerializeField] private Text sizeLabel;
-        [SerializeField] private Text timer;
-        [SerializeField] private Text matches;
-        [SerializeField] private Text score;
-        [SerializeField] private Text turns;
-        [SerializeField] private Text winMsg;
+        [SerializeField] private TextMeshProUGUI sizeLabel;
+        [SerializeField] private TextMeshProUGUI timer;
+        [SerializeField] private TextMeshProUGUI matches;
+        [SerializeField] private TextMeshProUGUI score;
+        [SerializeField] private TextMeshProUGUI turns;
+        [SerializeField] private TextMeshProUGUI winMsg;
 
         public static MainGameController Instance;
         private static int _gameSize = 2;
@@ -54,7 +57,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
             #if UNITY_ANDROID
                      Screen.orientation = ScreenOrientation.LandscapeRight;
             #endif
-            SetupGame(false, false, true);
         }
         private void SetupGame(bool gameStart, bool showGamePanel, bool showInfoPanel)
         {
@@ -71,6 +73,7 @@ namespace Ephemeral.ScriptsOnly.Scripts
             sizeSlider.value = _gameSize;
             SetGameSize();
         }
+
         public void SetGameSize()
         {
             _gameSize = (int)sizeSlider.value;
@@ -102,6 +105,7 @@ namespace Ephemeral.ScriptsOnly.Scripts
             SpriteCardAllocation();
             StartCoroutine(HideFace());
             _time = 0;
+            
         }
         private void SetGamePanel()
         {
@@ -200,7 +204,7 @@ namespace Ephemeral.ScriptsOnly.Scripts
             yield return new WaitForSeconds(0.3f);
 
             foreach (var objCard in _cards)
-                objCard.Flip();
+                objCard.Flip(true);
 
             yield return new WaitForSeconds(GameConstants.GameWaitForSeconds);
         }
@@ -245,7 +249,7 @@ namespace Ephemeral.ScriptsOnly.Scripts
                     _cardLeft -= 2;
                     _winningCount++;
                     _scoringSystem.IncrementScore();
-                    _scoringSystem.CheckCombo();
+                    _scoringSystem.CheckCombo(score);
                     score.text = $"Score: {_scoringSystem.Score}"; // Update UI
                     matches.text = $"Matches: {_winningCount}";
                     CheckGameWin();
@@ -253,8 +257,8 @@ namespace Ephemeral.ScriptsOnly.Scripts
                 }
                 else
                 {
-                    _cards[_cardSelected].Flip();
-                    _cards[cardId].Flip();
+                    _cards[_cardSelected].Flip(true);
+                    _cards[cardId].Flip(true);
                     _missingCount++;
                     _scoringSystem.ResetComboStreak();
                     turns.text = $"Turns: {_missingCount}";
@@ -283,8 +287,8 @@ namespace Ephemeral.ScriptsOnly.Scripts
         private void EndGame()
         {
             _gameStart = false;
-            SetPanelVisibility(new List<GameObject> { gamePanel, infoPanel, menuPanel },
-                new List<bool> { false, false, true });
+            SetPanelVisibility(new List<GameObject> { gamePanel, infoPanel, menuPanel,helpPanel },
+                new List<bool> { false, false, false,true });
             DisplayWinInfo(false);
         }
         public void GiveUp()
@@ -319,7 +323,17 @@ namespace Ephemeral.ScriptsOnly.Scripts
         }
         private void SaveGameData()
         {
-            _gameStateManager.SaveGameData(_winningCount, _missingCount, _gameSize, _scoringSystem.Score);
+           _gameStateManager.SaveGameData(_winningCount, _missingCount, _gameSize, _scoringSystem.Score);
+        }
+        
+        public void CloseInfo()
+        {
+            helpPanel.transform.DOScale(0f, 0.8f)
+                .OnComplete(() =>
+                {
+                    helpPanel.SetActive(false);
+                    SetupGame(false, false, true);
+                });;
         }
     }
 }

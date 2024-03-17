@@ -11,7 +11,7 @@ namespace Ephemeral.ScriptsOnly.Scripts
         public void CardBtn()
         {
             if (_flipped || _turning || !MainGameController.Instance.CanClick()) return;
-            Flip();
+            Flip(true);
             StartCoroutine(DelayedSelectionEvent());
         }
         // Inform main game manager card is selected with a slight delay

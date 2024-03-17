@@ -1,5 +1,8 @@
 ﻿//This interface defines methods for managing player score system
 
+using TMPro;
+using UnityEngine;
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public interface IScoringSystem
@@ -8,6 +11,6 @@ namespace Ephemeral.ScriptsOnly.Scripts
         void IncrementScore();
         void ResetScore();
         void ResetComboStreak();
-        void CheckCombo();
+        void CheckCombo(TextMeshProUGUI  animObj);
     }
 }

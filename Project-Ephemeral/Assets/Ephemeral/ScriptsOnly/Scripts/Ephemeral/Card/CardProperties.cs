@@ -22,6 +22,12 @@ namespace Ephemeral.ScriptsOnly.Scripts
             set => _id = value;
             get => _id;
         }
+
+        public bool IsFlipped
+        {
+
+            get => _flipped;
+        }
         // Reset card default rotation
         public void ResetRotation()
         {

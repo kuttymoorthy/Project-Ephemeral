@@ -1,5 +1,9 @@
 ﻿//This class handles the player score system in the game
 
+using DG.Tweening;
+using TMPro;
+using UnityEngine;
+
 namespace Ephemeral.ScriptsOnly.Scripts
 {
     public class ScoringSystem : IScoringSystem
@@ -24,12 +28,19 @@ namespace Ephemeral.ScriptsOnly.Scripts
         {
             _comboStreak = 0;
         }
-        public void CheckCombo()
+        public void CheckCombo(TextMeshProUGUI  animObj)
         {
             _comboStreak++;
             if (_comboStreak >= ComboThreshold)
             {
                 // We can add visual effects for combos
+                animObj.transform.DOScale(1.0f * 1.5f, 0.5f)
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() =>
+                    {
+                        animObj.transform.DOScale(1, 0.5f)
+                            .SetEase(Ease.OutQuad);
+                    });
             }
         }
     }
